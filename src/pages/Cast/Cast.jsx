@@ -2,13 +2,14 @@ import { act, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovieDetails } from "../../Redux/Slices/MovieDetailsSlice";
 import { imgBaseURL } from "../../components/Carsoul/Carsoul";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { getMovieActors } from "../../Redux/Slices/MovieActorsSlice";
 
 const Cast=()=>{
     const {MovieId}=useParams()
     const dispatch=useDispatch()
+    const navigate=useNavigate()
     const movieDetails =useSelector((state)=>state.MovieDetails.MovieDetail)
     const cast =useSelector((state)=>state.MovieActors.MovieActor.cast)
     const crew =useSelector((state)=>state.MovieActors.MovieActor.crew)
@@ -37,7 +38,7 @@ const Cast=()=>{
                 <h1 className="font-semibold text-white text-3xl m-3 mb-5 mt-8  opacity-90">Cast <span className="text-sky-500">{cast.length}</span> </h1>
                 {cast&&cast.map((actor)=>{
                     return(
-                        <div className="w-[60%] h-[30vh] bg-gray-700 flex mb-10">
+                        <div className="w-[60%] h-[30vh] bg-gray-700 flex mb-10" onClick={()=>navigate(`/movieDetails/${MovieId}/actor/${actor.id}`)}>
                             <img src={`${imgBaseURL}${actor.profile_path}`} alt="" />
                             <h1 className="font-semibold text-white text-2xl m-3 mb-5 mt-8  opacity-90">{actor.name}</h1>
                         </div>
@@ -51,7 +52,7 @@ const Cast=()=>{
                 {crew && crew.map((actor) => {
                     if (actor.department === 'Production') {
                         return (
-                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10">
+                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10" onClick={()=>navigate(`/movieDetails/${MovieId}/actor/${actor.id}`)}>
                             <img src={`${imgBaseURL}${actor.profile_path}`}  />
                             <h1 className="font-semibold text-white text-2xl m-3 mb-5 mt-8  opacity-90">{actor.name}</h1>
                         </div>
@@ -63,7 +64,7 @@ const Cast=()=>{
                 {crew && crew.map((actor) => {
                     if (actor.department === 'Crew') {
                         return (
-                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10">
+                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10" onClick={()=>navigate(`/movieDetails/${MovieId}/actor/${actor.id}`)}>
                             <img src={`${imgBaseURL}${actor.profile_path}`}  />
                             <h1 className="font-semibold text-white text-2xl m-3 mb-5 mt-8  opacity-90">{actor.name}</h1>
                         </div>
@@ -75,7 +76,7 @@ const Cast=()=>{
                 {crew && crew.map((actor) => {
                     if (actor.department === 'Sound') {
                         return (
-                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10">
+                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10" onClick={()=>navigate(`/movieDetails/${MovieId}/actor/${actor.id}`)}>
                             <img src={`${imgBaseURL}${actor.profile_path}`}  />
                             <h1 className="font-semibold text-white text-2xl m-3 mb-5 mt-8  opacity-90">{actor.name}</h1>
                         </div>
@@ -87,7 +88,7 @@ const Cast=()=>{
                 {crew && crew.map((actor) => {
                     if (actor.department === 'Editing') {
                         return (
-                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10">
+                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10" onClick={()=>navigate(`/movieDetails/${MovieId}/actor/${actor.id}`)}>
                             <img src={`${imgBaseURL}${actor.profile_path}`}  />
                             <h1 className="font-semibold text-white text-2xl m-3 mb-5 mt-8  opacity-90">{actor.name}</h1>
                         </div>
@@ -99,7 +100,7 @@ const Cast=()=>{
                 {crew && crew.map((actor) => {
                     if (actor.department === 'Lighting') {
                         return (
-                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10">
+                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10" onClick={()=>navigate(`/movieDetails/${MovieId}/actor/${actor.id}`)}>
                             <img src={`${imgBaseURL}${actor.profile_path}`}  />
                             <h1 className="font-semibold text-white text-2xl m-3 mb-5 mt-8  opacity-90">{actor.name}</h1>
                         </div>
@@ -111,7 +112,7 @@ const Cast=()=>{
                 {crew && crew.map((actor) => {
                     if (actor.department === 'Visual Effects') {
                         return (
-                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10">
+                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10" onClick={()=>navigate(`/movieDetails/${MovieId}/actor/${actor.id}`)}>
                             <img src={`${imgBaseURL}${actor.profile_path}`}  />
                             <h1 className="font-semibold text-white text-2xl m-3 mb-5 mt-8  opacity-90">{actor.name}</h1>
                         </div>
@@ -123,7 +124,7 @@ const Cast=()=>{
                 {crew && crew.map((actor) => {
                     if (actor.department === 'Art') {
                         return (
-                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10">
+                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10" onClick={()=>navigate(`/movieDetails/${movieId}/actor/${actor.id}`)}>
                             <img src={`${imgBaseURL}${actor.profile_path}`}  />
                             <h1 className="font-semibold text-white text-2xl m-3 mb-5 mt-8  opacity-90">{actor.name}</h1>
                         </div>
@@ -135,7 +136,7 @@ const Cast=()=>{
                 {crew && crew.map((actor) => {
                     if (actor.department === 'Costume & Make-Up') {
                         return (
-                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10">
+                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10" onClick={()=>navigate(`/movieDetails/${MovieId}/actor/${actor.id}`)}>
                             <img src={`${imgBaseURL}${actor.profile_path}`}  />
                             <h1 className="font-semibold text-white text-2xl m-3 mb-5 mt-8  opacity-90">{actor.name}</h1>
                         </div>
@@ -147,7 +148,7 @@ const Cast=()=>{
                 {crew && crew.map((actor) => {
                     if (actor.department === 'Camera') {
                         return (
-                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10">
+                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10" onClick={()=>navigate(`/movieDetails/${MovieId}/actor/${actor.id}`)}>
                             <img src={`${imgBaseURL}${actor.profile_path}`}  />
                             <h1 className="font-semibold text-white text-2xl m-3 mb-5 mt-8  opacity-90">{actor.name}</h1>
                         </div>
@@ -159,7 +160,7 @@ const Cast=()=>{
                 {crew && crew.map((actor) => {
                     if (actor.department === 'Writing') {
                         return (
-                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10">
+                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10" onClick={()=>navigate(`/movieDetails/${MovieId}/actor/${actor.id}`)}>
                             <img src={`${imgBaseURL}${actor.profile_path}`}  />
                             <h1 className="font-semibold text-white text-2xl m-3 mb-5 mt-8  opacity-90">{actor.name}</h1>
                         </div>
@@ -171,7 +172,7 @@ const Cast=()=>{
                 {crew && crew.map((actor) => {
                     if (actor.department === 'Directing') {
                         return (
-                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10">
+                        <div key={actor.id} className="w-[60%] h-[30vh] bg-gray-700 flex mb-10" onClick={()=>navigate(`/movieDetails/${MovieId}/actor/${actor.id}`)}>
                             <img src={`${imgBaseURL}${actor.profile_path}`}  />
                             <h1 className="font-semibold text-white text-2xl m-3 mb-5 mt-8  opacity-90">{actor.name}</h1>
                         </div>
@@ -185,10 +186,7 @@ const Cast=()=>{
 
 
     
-                <div className="w-[60%] h-[30vh] bg-gray-700 flex mb-10">
-                    <img src="" alt="" />
-                    <h1></h1>
-                </div>
+           
             </div>
             
         </div>

@@ -2,40 +2,39 @@ import axios from 'axios';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 const initialState = {
     loading:false,
-    Videos:[],
+    arabichMov:[],
     error:null,
 }
-
-export const getVideos=createAsyncThunk('getVideos',async(movieId)=>{
+export const apiKey = '24d38b4a145b9182f5e744b0a8a2c2c2';
+export const baseURL = 'https://api.themoviedb.org/3';
+export const getArabicMovies=createAsyncThunk('getArabicMovies',async()=>{
 
     const options = {
       method: 'GET',
-      url: `https://api.themoviedb.org/3/movie/${movieId}/videos`,
-      params: {language: 'en-US'},
+      url: `${baseURL}/discover/movie?api_key=${apiKey}&with_original_language=ar`,
       headers: {
         accept: 'application/json',
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNGQzOGI0YTE0NWI5MTgyZjVlNzQ0YjBhOGEyYzJjMiIsIm5iZiI6MTcyMzMwMDAxMy4zODEsInN1YiI6IjY2Yjc3OGFkZTg2ZjA3ZGI2ZmE4YzgwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZO9xjjo4ecD44qAygN00FvB1G9oIcBuslIYftcBmOp8'
       }
     };
-    
-   
+
 const response = await axios.request(options);
       return response.data;
 })
- const VideosSlice = createSlice({
-    name: 'videos slice',
+ const ArabicMoviesSlice = createSlice({
+    name: 'english movies slice',
     initialState,
     extraReducers:(builder)=>{
-        builder.addCase(getVideos.pending,(state,action)=>{
+        builder.addCase(getArabicMovies.pending,(state,action)=>{
             console.log('pend')
             state.loading=true;
         })
-        builder.addCase(getVideos.fulfilled,(state,action)=>{
+        builder.addCase(getArabicMovies.fulfilled,(state,action)=>{
             console.log('ful')
             state.loading=false;
-           state.Videos=action.payload;
+           state.arabichMov=action.payload;
         })
-        builder.addCase(getVideos.rejected,(state,action)=>{
+        builder.addCase(getArabicMovies.rejected,(state,action)=>{
             console.log('rej')
             state.loading=false;
         })
@@ -44,4 +43,5 @@ const response = await axios.request(options);
 
 
     })
-    export const videos=VideosSlice.reducer;
+    export const ArabicMovie=ArabicMoviesSlice.reducer;
+

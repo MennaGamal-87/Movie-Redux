@@ -9,10 +9,12 @@ import { FaInstagram } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import Scroller from "../../components/Slider/Slider";
 import { getMovieActors } from "../../Redux/Slices/MovieActorsSlice";
-import Tab from "../../components/Tab/Tab";
 import { getAKeywords } from "../../Redux/Slices/KeywordsSlice";
 import { getRecommendations } from "../../Redux/Slices/RecommendationSlice";
 import { getReviews } from "../../Redux/Slices/ReviewsSlice";
+import RecommendSlider from "../../components/RecommendationsSlider/RecommendSlider";
+import { TabsWithIcon } from "../../components/Tab/Tab";
+
 
 const MovieDetails=()=>{
     const {id}=useParams();
@@ -23,7 +25,7 @@ const MovieDetails=()=>{
     const keywords=useSelector((state)=>state.Mkeywords.Keywords.keywords)
    const recommendations=useSelector((state)=>state.Recommendation.recommendations.results)
    const reviews=useSelector((state)=>state.Reviews.reviews.results)
-    console.log(reviews);
+    console.log(recommendations);
     
     useEffect(()=>{
         dispatch(getMovieDetails(id))
@@ -69,11 +71,11 @@ const MovieDetails=()=>{
                 </div>
                 <h1 onClick={()=>navigate(`/movieDetails/${movieDetails.id}/cast`)} className="font-semibold text-sky-400 text-2xl m-3 mb-2 mt-0  opacity-90 hover:cursor-pointer">Full Cast & Crew</h1>
                 <h1 className="font-semibold text-sky-400 text-2xl m-3 mb-2 mt-8  opacity-90">Social</h1>
-                <Tab/>
+                <TabsWithIcon movieId={id}/>
                 <h1 className="font-semibold text-sky-400 text-2xl m-3 mb-2 mt-8  opacity-90">Media</h1>
-                <Tab/>
+                <TabsWithIcon/>
                 <h1 className="font-semibold text-sky-400 text-2xl m-3 mb-2 mt-8  opacity-90">Recommendations</h1>
-                <Scroller/>
+                <RecommendSlider movieId={id} recommendations={recommendations}/>
             </div>
             <div className="w-[25%] h-auto  pt-6">
                 <div className="w-[80%] pl-2 text-sky-400 flex justify-between items-center text-3xl">

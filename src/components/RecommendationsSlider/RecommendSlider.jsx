@@ -4,10 +4,11 @@ import { imgBaseURL } from "../Carsoul/Carsoul";
 import { FaArrowRight } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const Scroller = ({cast,movieId}) => {
+const RecommendSlider = ({recommendations,movieId}) => {
   const scrollContainerRef = useRef(null);
   const [showButton, setShowButton] = useState(true);
-
+  console.log(recommendations);
+  
   const navigate=useNavigate()
 //   const items = [
 //     {
@@ -105,17 +106,17 @@ const Scroller = ({cast,movieId}) => {
           className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth h-full"
           onScroll={handleScroll}
         >
-          {cast&&cast.map((actor) => (
+          {recommendations&&recommendations.map((  recomm) => (
             <div
-              key={actor.id}
-              className="flex-none w-[15%] h-[45vh] bg-gray-600 rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105"
+              key={ recomm.id}
+              className="flex-none w-[35%] h-[75vh] bg-gray-600  shadow-lg overflow-hidden transition-transform hover:scale-105 p-1"
               role="article"
-              onClick={()=>navigate(`/movieDetails/${movieId}/actor/${actor.id}`)}
+              onClick={()=>navigate(`/movieDetails/${recomm.id}`)}
             >
-              <div className="relative h-48 w-full">
+              <div className="relative h-[65vh] w-full m-2 mr-2 m-auto">
                 <img
-                  src={`${imgBaseURL}${actor.profile_path}`}
-                  alt={actor.title}
+                  src={`${imgBaseURL}${  recomm.poster_path}`}
+                  alt={  recomm.title}
                   className="w-full h-full object-cover"
                   loading="lazy"
                   onError={(e) => {
@@ -124,32 +125,19 @@ const Scroller = ({cast,movieId}) => {
                 />
               </div>
               <div className="p-4">
-                <h3 className="text-[20px] font-semibold mb-2">{actor.name}</h3>
+                <h3 className="text-[16px] font-semibold text-center ">{  recomm.original_title
+                }</h3>
               
               </div>
             </div>
           ))}
-           <div
-              className="flex-none w-[15%] h-[45vh] p-2 pt-30  rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105 hover:cursor-pointer"
-              role="article"
-            >
-                <button onClick={()=>navigate(`/movieDetails/${movieId}/cast`)} ><FaArrowRight className="text-center" />
-                Show more</button>
-            </div>
+          
         </div> 
 
-        {showButton && (
-          <button
-            onClick={scrollRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 z-10 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            aria-label="Show more items"
-          >
-            <FaChevronRight className="text-indigo-600 text-xl" />
-          </button>
-        )}
+        
       </div>
     </div>
   );
 };
 
-export default Scroller;
+export default RecommendSlider;

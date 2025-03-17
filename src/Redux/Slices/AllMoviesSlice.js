@@ -5,9 +5,7 @@ const initialState = {
     loading:false,
     Movies: [],
     error:null,
-  }
-//   const apiKey = '24d38b4a145b9182f5e744b0a8a2c2c2';
-//    const baseURL = 'https://api.themoviedb.org/3'; 
+}
 export const getAllMovies=createAsyncThunk('getAllMovies',async()=>{
     const options = {
         method: 'GET',

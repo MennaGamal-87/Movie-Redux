@@ -6,17 +6,18 @@ import Carsoul from "../../components/Carsoul/Carsoul";
 import { getTopRatedSeries } from "../../Redux/Slices/TopSerieslice";
 import { getTopRatedMovies } from "../../Redux/Slices/TopMoviesSlice";
 import { useNavigate } from "react-router-dom";
+import MovieCard from "../../components/Card/MovieCard";
 
 
 const Home=() => {
   const navigate=useNavigate();
   const loading=useSelector((state)=>state.loading)
     const AllMovies =useSelector((state)=>state.Movies.Movies.results)
-    console.log(AllMovies)
+    
     const AllSeries=useSelector((state)=>state.Series.Series.results)
-    console.log(AllSeries)
+   
     const TopSeries =useSelector((state)=>state.TopSeries.TopRatedSeries.results)
-    console.log(TopSeries)
+  
     const TopMovies =useSelector((state)=>state.TopMovies.TopRatedMovies.results)
     console.log(TopMovies)
     const dispatch=useDispatch();
@@ -32,14 +33,14 @@ const Home=() => {
         {loading&&(<span className="loader"></span>)}
         <h1 className="font-bold text-blue-600 text-3xl m-3 mb-8 text-center">HOME</h1>
         <div className="w-[90%] m-auto flex justify-evenly items-center">
-          <div onClick={()=>{navigate('/englishMovies')}} className={`bg-blue-700 rounded-[50%] w-[8%] h-[8vh] p-2 hover:cursor-pointer hover:bg-amber-50 hover:text-blue-600 transition 1s hover:transform-`}>
-            <h1 className="text-white text-center   text-2xl">English</h1>
+          <div onClick={()=>{navigate('/englishMovies')}} className={`bg-blue-700 rounded-[50%] w-[8%] h-[8vh] p-3 hover:cursor-pointer hover:bg-amber-50 hover:text-blue-500  transition duration-1500 hover:scale-150`}>
+            <h1 className="text-white text-center hover:text-blue-600   text-2xl ">English</h1>
           </div>
-          <div className="bg-blue-600 rounded-[50%] w-[8%] h-[8vh] p-2">
-            <h1 className="text-white text-center  text-2xl">Arabic</h1>
+          <div onClick={()=>{navigate('/arabicMovies')}} className="bg-blue-600 rounded-[50%] w-[8%] h-[8vh] p-2 hover:cursor-pointer hover:bg-amber-50 hover:text-blue-500  transition duration-1500 hover:scale-150">
+            <h1 className="text-white text-center hover:text-blue-600   text-2xl">Arabic</h1>
           </div>
-          <div className="bg-blue-600 rounded-[50%] w-[8%] h-[8vh] p-2">
-            <h1 className="text-white text-center  text-2xl">Asian</h1>
+          <div onClick={()=>{navigate('/asianMovies')}} className="bg-blue-600 rounded-[50%] w-[8%] h-[8vh] p-2 hover:cursor-pointer hover:bg-amber-50 hover:text-blue-500  transition duration-1500 hover:scale-150">
+            <h1 className="text-white text-center hover:text-blue-600   text-2xl">Asian</h1>
           </div>
         </div>
         <div className="w-[90%] m-auto mb-10">
@@ -52,11 +53,11 @@ const Home=() => {
         </div>
         <div className="w-[90%] m-auto">
         <h1 className="font-bold text-blue-600 text-3xl m-3 mb-8">TOP MOVIES</h1>
-        <Carsoul data={TopMovies}></Carsoul>
+        <MovieCard topData={TopMovies}/>
         </div>
         <div className="w-[90%] m-auto">
         <h1 className="font-bold text-blue-600 text-3xl m-3 mb-8">TOP SERIES</h1>
-        <Carsoul data={TopSeries}></Carsoul>
+        <MovieCard topData={TopSeries}></MovieCard>
         </div>
        
         

@@ -2,15 +2,14 @@ import axios from 'axios';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 const initialState = {
     loading:false,
-    Videos:[],
+    knownFor:[],
     error:null,
 }
 
-export const getVideos=createAsyncThunk('getVideos',async(movieId)=>{
-
+export const getActorKnownFor=createAsyncThunk('getActorKnownFor',async(actorId)=>{
     const options = {
       method: 'GET',
-      url: `https://api.themoviedb.org/3/movie/${movieId}/videos`,
+      url: `https://api.themoviedb.org/3/person/${actorId}/movie_credits`,
       params: {language: 'en-US'},
       headers: {
         accept: 'application/json',
@@ -18,24 +17,23 @@ export const getVideos=createAsyncThunk('getVideos',async(movieId)=>{
       }
     };
     
-   
 const response = await axios.request(options);
       return response.data;
 })
- const VideosSlice = createSlice({
-    name: 'videos slice',
+ const KnownForSlice = createSlice({
+    name: 'actor slice',
     initialState,
     extraReducers:(builder)=>{
-        builder.addCase(getVideos.pending,(state,action)=>{
+        builder.addCase(getActorKnownFor.pending,(state,action)=>{
             console.log('pend')
             state.loading=true;
         })
-        builder.addCase(getVideos.fulfilled,(state,action)=>{
+        builder.addCase(getActorKnownFor.fulfilled,(state,action)=>{
             console.log('ful')
             state.loading=false;
-           state.Videos=action.payload;
+           state.knownFor=action.payload;
         })
-        builder.addCase(getVideos.rejected,(state,action)=>{
+        builder.addCase(getActorKnownFor.rejected,(state,action)=>{
             console.log('rej')
             state.loading=false;
         })
@@ -44,4 +42,7 @@ const response = await axios.request(options);
 
 
     })
-    export const videos=VideosSlice.reducer;
+    export const actorKnownFor=KnownForSlice.reducer;
+
+
+
