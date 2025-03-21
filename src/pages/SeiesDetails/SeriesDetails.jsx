@@ -16,17 +16,18 @@ import RecommendSlider from "../../components/RecommendationsSlider/RecommendSli
 import { TabsWithIcon } from "../../components/Tab/Tab";
 import { ReviewTab } from "../../components/ReviewTab/ReviewTab";
 import { MdAddToPhotos, MdOutlineSlowMotionVideo, MdOutlineStarRate } from "react-icons/md";
+import { getSeriesDetails } from "../../Redux/Slices/SeriesDetailsSlice";
 
 
-const MovieDetails=()=>{
+const SeriesDetails=()=>{
     const {id}=useParams();
     const navigate=useNavigate()
     const dispatch=useDispatch()
     var loading=useSelector((state)=>state.MovieDetails.loading)
     const movieActors =useSelector((state)=>state.MovieActors.MovieActor.cast)
     const crew =useSelector((state)=>state.MovieActors.MovieActor.crew)
-    const movieDetails =useSelector((state)=>state.MovieDetails.MovieDetail)
-    console.log(movieDetails);
+    const SeriesDetails =useSelector((state)=>state.seriesDetails.SeriesDetail)
+    console.log(SeriesDetails);
     
     const keywords=useSelector((state)=>state.Mkeywords.Keywords.keywords)
    const recommendations=useSelector((state)=>state.Recommendation.recommendations.results)
@@ -34,7 +35,7 @@ const MovieDetails=()=>{
    var count=0
     
     useEffect(()=>{
-        dispatch(getMovieDetails(id))
+        dispatch(getSeriesDetails(id))
         dispatch(getMovieActors(id))
         dispatch(getAKeywords(id))
         dispatch(getRecommendations(id))
@@ -44,7 +45,7 @@ const MovieDetails=()=>{
             {loading&&(<span className="loader w-[100%] h-[40vh] m-auto absolute top-50 left-[47%]"></span>)}
 
         <div className="relative w-[100%] h-[90vh]  overflow-hidden shadow-lg">
-            <img className="w-full h-full object-cover" src={`${imgBaseURL}${movieDetails.backdrop_path}`} alt="" />
+            <img className="w-full h-full object-cover" src={`${imgBaseURL}${SeriesDetails.backdrop_path}`} alt="" />
             <div className="w-[100%] h-[90vh] absolute top-0 bg-black opacity-60">
               
             </div>
@@ -52,12 +53,12 @@ const MovieDetails=()=>{
                 <h1 className="font-bold text-sky-400 text-3xl m-3 mb-2 mt-8 text-center opacity-90" >Movie - Details</h1>
                 <div className="w-[90%] h-auto p-2 pl-0 flex justify-evenly items-center m-auto ">
                     <div className="w-[30%]  h-auto p-5 pl-0 ">
-                        <img className="object-fill" src={`${imgBaseURL}${movieDetails.poster_path}`} alt="" />
+                        <img className="object-fill" src={`${imgBaseURL}${SeriesDetails.poster_path}`} alt="" />
                     </div>
                     <div className="w-[60%] h-auto p-1 mb-10">
-                        <h1 className="font-semibold text-white text-3xl m-0 mb-0 mt-0  opacity-90">{movieDetails.title}</h1>
-                        <p className="mt-5">{movieDetails.release_date}({movieDetails.original_language})   -{movieDetails.runtime}min</p>
-                        <h1 className="font-bold text-sky-400 text-3xl m-3 mb-2 mt-8  opacity-90">OverView : <span className="text-white text-[16px] font-semibold">{movieDetails.overview}</span></h1>
+                        <h1 className="font-semibold text-white text-3xl m-0 mb-0 mt-0  opacity-90">{SeriesDetails.title}</h1>
+                        <p className="mt-5">{SeriesDetails.release_date}({SeriesDetails.original_language})   -{SeriesDetails.runtime}min</p>
+                        <h1 className="font-bold text-sky-400 text-3xl m-3 mb-2 mt-8  opacity-90">OverView : <span className="text-white text-[16px] font-semibold">{SeriesDetails.overview}</span></h1>
                         <h1 className="font-bold text-sky-400 text-3xl m-3 mb-2 mt-8  opacity-90">Casting</h1>
                         <div className="w-[90%] h-[35vh]  flex items-center justify-between flex-wrap">
                             <div className="w-[50%] ">
@@ -128,10 +129,10 @@ const MovieDetails=()=>{
                 <div className="w-[100%]  m-auto flex flex-nowrap scroll-auto justify-evenly mb-0">
                   <Scroller movieId={id} cast={movieActors}/>
                 </div>
-                <h1 onClick={()=>navigate(`/movieDetails/${movieDetails.id}/cast`)} className="font-semibold text-sky-400 text-[20px] m-3 mb-2 mt-0  opacity-90 hover:cursor-pointer">Full Cast & Crew</h1>
+                <h1 onClick={()=>navigate(`/movieDetails/${SeriesDetails.id}/cast`)} className="font-semibold text-sky-400 text-[20px] m-3 mb-2 mt-0  opacity-90 hover:cursor-pointer">Full Cast & Crew</h1>
                 <h1 className="font-semibold text-sky-400 text-2xl m-3 mb-5 mt-8  opacity-90">Social</h1>
                 <ReviewTab movieId={id}/>
-                <h1 onClick={()=>navigate(`/movieDetails/${movieDetails.id}/reviews`)} className="font-semibold  text-sky-400 text-[20px] m-3   opacity-90 hover:cursor-pointer">Read All Reviews</h1>
+                <h1 onClick={()=>navigate(`/movieDetails/${SeriesDetails.id}/reviews`)} className="font-semibold  text-sky-400 text-[20px] m-3   opacity-90 hover:cursor-pointer">Read All Reviews</h1>
 
                 <h1 className="font-semibold text-sky-400 text-2xl m-3 mb-2 mt-8  opacity-90">Media</h1>
                 <TabsWithIcon movieId={id}/>
@@ -148,19 +149,19 @@ const MovieDetails=()=>{
                 </div>
                 <div className="w-[90%] mt-5 pt-2">
                     <h1 className="font-semibold text-white text-2xl m-3 mb-0 mt-8  opacity-90">Status</h1>
-                    <h1 className="font-semibold text-sky-400 text-[20px] m-3 mb-2 mt-0 opacity-90">{movieDetails.status}</h1>
+                    <h1 className="font-semibold text-sky-400 text-[20px] m-3 mb-2 mt-0 opacity-90">{SeriesDetails.status}</h1>
                 </div>
                 <div className="mt-2">
                     <h1 className="font-semibold text-white text-2xl m-3 mb-0 mt-8  opacity-90">Ariginal Language</h1>
-                    <h1 className="font-semibold text-sky-400 text-[20px] m-3 mb-2 mt-0  opacity-90">{movieDetails.original_language}</h1>
+                    <h1 className="font-semibold text-sky-400 text-[20px] m-3 mb-2 mt-0  opacity-90">{SeriesDetails.original_language}</h1>
                 </div>
                 <div className="mt-2">
                     <h1 className="font-semibold text-white text-2xl m-3 mb-0 mt-8  opacity-90">Budget</h1>
-                    <h1 className="font-semibold text-sky-400 text-[20px] m-3 mb-2 mt-0  opacity-90">{movieDetails.budget}</h1>
+                    <h1 className="font-semibold text-sky-400 text-[20px] m-3 mb-2 mt-0  opacity-90">{SeriesDetails.budget}</h1>
                 </div>
                 <div className="mt-2">
                     <h1 className="font-semibold text-white text-2xl m-3 mb-0 mt-8  opacity-90">Revenue</h1>
-                    <h1 className="font-semibold text-sky-400 text-[20px] m-3 mb-2 mt-0  opacity-90">${movieDetails.revenue}</h1>
+                    <h1 className="font-semibold text-sky-400 text-[20px] m-3 mb-2 mt-0  opacity-90">${SeriesDetails.revenue}</h1>
                 </div>
                 <div>
                     <h1 className="font-semibold text-white text-2xl m-3 mb-0 mt-8  opacity-90">Keywords</h1>
@@ -177,4 +178,4 @@ const MovieDetails=()=>{
         
     </>)
 }
-export default MovieDetails;
+export default SeriesDetails;

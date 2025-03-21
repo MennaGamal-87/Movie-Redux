@@ -6,6 +6,7 @@ const initialState = {
     Movies: [],
     error:null,
 }
+
 export const getAllMovies=createAsyncThunk('getAllMovies',async()=>{
     const options = {
         method: 'GET',

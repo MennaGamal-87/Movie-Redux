@@ -95,7 +95,7 @@ const Scroller = ({cast,movieId}) => {
   };
 
   return (
-    <div className="relative w-full mx-auto px-1 py-8">
+    <div className="relative w-full mx-auto px-1 pt-8 py-2">
       <div
         className="relative overflow-hidden"
         onWheel={handleWheel}

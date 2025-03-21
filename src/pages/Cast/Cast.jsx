@@ -5,6 +5,7 @@ import { imgBaseURL } from "../../components/Carsoul/Carsoul";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { getMovieActors } from "../../Redux/Slices/MovieActorsSlice";
+import SubHeader from "../../components/SubHeader/SubHeader";
 
 const Cast=()=>{
     const {MovieId}=useParams()
@@ -13,7 +14,9 @@ const Cast=()=>{
     const movieDetails =useSelector((state)=>state.MovieDetails.MovieDetail)
     const cast =useSelector((state)=>state.MovieActors.MovieActor.cast)
     const crew =useSelector((state)=>state.MovieActors.MovieActor.crew)
-  console.log(crew);
+    var loading=useSelector((state)=>state.MovieActors.loading)
+
+//   console.log(crew);
   
     useEffect(()=>{
         dispatch(getMovieDetails(MovieId))
@@ -21,7 +24,10 @@ const Cast=()=>{
     },[])
     return(
         <>
-        <div className="w-[100%] h-[30vh] bg-gray-600 flex items-center mb-10">
+        <SubHeader/>
+        {loading&&(<span className="loader w-[100%] h-[40vh] m-auto absolute top-50 left-[47%]"></span>)}
+
+        {/* <div className="w-[100%] h-[30vh] bg-gray-600 flex items-center mb-10">
             <div className="w-[40%] h-[20vh] flex justify-evenly items-center">
                 <img className="w-[25%] h-[25vh] rounded-2xl" src={`${imgBaseURL}${movieDetails.poster_path}`} alt="" />
                 <div>
@@ -32,7 +38,7 @@ const Cast=()=>{
                 </div>
                 </div>
             </div>
-        </div>
+        </div> */}
         <div className="w-[85%] h-auto m-auto flex p-4">
             <div className="w-[50%] ">
                 <h1 className="font-semibold text-white text-3xl m-3 mb-5 mt-8  opacity-90">Cast <span className="text-sky-500">{cast.length}</span> </h1>

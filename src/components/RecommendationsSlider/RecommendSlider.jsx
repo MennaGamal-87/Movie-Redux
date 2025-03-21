@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const RecommendSlider = ({recommendations,movieId}) => {
   const scrollContainerRef = useRef(null);
   const [showButton, setShowButton] = useState(true);
-  console.log(recommendations);
+  // console.log(recommendations);
   
   const navigate=useNavigate()
 //   const items = [

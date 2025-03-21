@@ -1,59 +1,76 @@
 import {
-    Tabs,
-    TabsHeader,
-    TabsBody,
-    Tab,
-    TabPanel,
-  } from "@material-tailwind/react";
+  Tabs,
+  TabsHeader,
+  TabsBody,
+  Tab,
+  TabPanel,
+} from "@material-tailwind/react";
+ 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getVideos } from "../../Redux/Slices/VideosSlice";
+import Carousel, { imgBaseURL } from "../Carsoul/Carsoul";
+import VideosCarousel from "../VideosCarsoul/VideosCarsoul";
+import { getPosters } from "../../Redux/Slices/PostersSlice";
+import PostersSlider from "../PostersSlider/PostersSlider";
    
   export function TabsWithIcon({movieId}) {
     const dispatch=useDispatch()
     const Videos=useSelector((state)=>state.videos.Videos.results)
-    console.log(Videos);
+    const posters=useSelector((state)=>state.posters.Posters.posters)
+    const backdrops=useSelector((state)=>state.posters.Posters.backdrops )
     useEffect(()=>{
         dispatch(getVideos(movieId))
+        dispatch(getPosters(movieId))
     },[])
     const data = [
       {
-        label: "VIDEOS",
-        value: "html",
-        desc: `It really matters and then like it really doesn't matter.
-        What matters is the people who are sparked by it. And the people 
-        who are like offended by it, it doesn't matter.`,
+        label: `VIDEOS (${Videos&&Videos.length})`,
+        value: "videos",
+        desc: <>
+        <VideosCarousel movieId={movieId} data={Videos}/>
+         </>,
       },
       {
-        label: "BACKDROPS",
-        value: "react",
-        desc: `Because it's about motivating the doers. Because I'm here
-        to follow my dreams and inspire other people to follow their dreams, too.`,
+        label: `BACKDROPS(${backdrops&&backdrops.length})`,
+        value: "backdrops",
+        desc: <PostersSlider type={'backDrops'} movieId={movieId} data={backdrops}/>,
       },
+   
       {
-        label: "POSTERS",
-        value: "vue",
-        desc: `We're not always in the position that we want to be at.
-        We're constantly growing. We're constantly making mistakes. We're
-        constantly trying to express ourselves and actualize our dreams.`,
+        label: `POSTERS (${posters&&posters.length})`,
+        value: "posters",
+        desc: <>
+        <PostersSlider type={'posters'} movieId={movieId} data={posters}/>
+        </>,
       },
+   
      
     ];
    
+    
+             
+
+   
     return (
-      <Tabs value="html">
-        <TabsHeader>
+      <Tabs id="custom-animation" value="html">
+        <TabsHeader className="mb-3 border-b-2 w-[100%]">
           {data.map(({ label, value }) => (
-            <Tab className="hover:border-sky-500 hover:border-2 text-center m-auto rounded-2xl transition-1s p-2" key={value} value={value}>
+            <Tab className="hover:bg-sky-600 w-[20%] p-2  rounded-t-3xl" key={value} value={value}>
               {label}
             </Tab>
           ))}
         </TabsHeader>
-        <TabsBody>
-          {Videos&&Videos.map((video) => (
-            <TabPanel className="bg-gray-900 rounded-3xl" >
-                <video src={`https://www.youtube.com/embed/${video.id}`}></video>
-              <iframe src={`https://www.youtube.com/embed/${video.key}`} frameborder="0"></iframe>
+        <TabsBody
+          animate={{
+            initial: { y: 250 },
+            mount: { y: 0 },
+            unmount: { y: 250 },
+          }}
+        >
+          {data.map(({ value, desc }) => (
+            <TabPanel className="p-2 px-6 rounded-2xl w-[100%]  h-[70vh]" key={value} value={value}>
+              {desc}
             </TabPanel>
           ))}
         </TabsBody>

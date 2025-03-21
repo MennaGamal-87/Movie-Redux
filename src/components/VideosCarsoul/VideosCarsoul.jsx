@@ -4,16 +4,18 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useNavigate } from 'react-router-dom';
 export const imgBaseURL = 'https://image.tmdb.org/t/p/w500';
-const Carousel = ({ data,type }) => {
+const VideosCarousel = ({ data }) => {
     const navigate=useNavigate();
+    // console.log(data);
+    
   
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 2,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 2000,
     responsive: [
       {
@@ -22,7 +24,7 @@ const Carousel = ({ data,type }) => {
           slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
-          dots: true,
+          dots: false,
         },
       },
       {
@@ -40,13 +42,11 @@ const Carousel = ({ data,type }) => {
     <div className="movie-carousel w-[99%] m-auto mb-9">
       <Slider {...settings}>
         {data&&data.map((movie) => (
-          <div key={movie.id} className="movie-slide px-8 hover:cursor-pointer" onClick={()=>{
-            if(type=='movie')(  navigate(`/movieDetails/${movie.id}`))
-              else if(type=='series')(  navigate(`/seriesDetails/${movie.id}`))
-                else(  navigate(`*`))
-          }}>
-           <img  src={`${imgBaseURL}${movie.poster_path}`} alt="" />
-
+          <div key={movie.id} className="movie-slide  p-3 hover:cursor-pointer w-[80%] h-auto " onClick={()=>{navigate(`/movieDetails/${movie.id}`)}}>
+           
+            <iframe className='w-[100%] h-[40vh] rounded-2xl' src={`https://www.youtube.com/embed/${movie.key}`}></iframe>
+            
+           
           </div>
         ))}
       </Slider>
@@ -54,4 +54,4 @@ const Carousel = ({ data,type }) => {
   );
 };
 
-export default Carousel;
+export default VideosCarousel;

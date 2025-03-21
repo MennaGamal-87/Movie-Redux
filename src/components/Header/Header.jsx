@@ -10,6 +10,9 @@ import {
 import { Link } from "react-router-dom";
  
 export function Header() {
+
+  
+
   const [openNav, setOpenNav] = React.useState(false);
  
   React.useEffect(() => {
@@ -50,9 +53,9 @@ export function Header() {
         className="flex items-center gap-x-2 p-1 font-medium"
       >
        
-        <a href="#" className="flex items-center">
+        <Link to={'/allSeries'} className="flex items-center">
           Series
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -61,15 +64,15 @@ export function Header() {
         className="flex items-center gap-x-2 p-1 font-medium"
       >
        
-        <a href="#" className="flex items-center">
+        <Link to={'/contactUs'} className="flex items-center">
           Contact Us
-        </a>
+        </Link>
       </Typography>
     </ul>
   );
  
   return (
-    <Navbar className="mx-auto max-w-screen-xl px-4 py-4 lg:px-8 lg:py-4 bg-black">
+    <Navbar className="mx-auto max-w-screen-xl px-4 py-4 lg:px-8 lg:py-4 bg-black border-none">
       <div className="container mx-auto flex flex-wrap items-center justify-between text-blue-gray-900">
         <Typography
           as="a"

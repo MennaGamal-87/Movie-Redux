@@ -5,7 +5,8 @@ import { Rating } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 
 const MovieCard=({topData})=>{
-    console.log(topData);
+  console.log(topData);
+  
    const navigate=useNavigate()
       const [isHovered, setIsHovered] = useState(false);
     return(
@@ -43,7 +44,7 @@ const MovieCard=({topData})=>{
                  
                   <div className="flex justify-evenly items-center mb-4" aria-label={`Rating: out of 5 stars`}>
                   
-                    <span className="ml-2 text-sky-600 text-[20px] font-semibold">{movie.vote_average
+                    <span className="ml-2 text-sky-600 text-[20px] font-semibold">RATE: {movie.vote_average
                     }</span>
                   </div> 
                   <button

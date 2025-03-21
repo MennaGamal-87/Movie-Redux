@@ -122,13 +122,14 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import MovieCard from "../Card/MovieCard";
 
 const API_KEY = "24d38b4a145b9182f5e744b0a8a2c2c2";
 const API_URL = "https://api.themoviedb.org/3/movie/popular";
 
 const Pagination = () => {
     const navigate=useNavigate()
-  const [movies, setMovies] = useState([]);
+ const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -136,8 +137,8 @@ const Pagination = () => {
     const fetchMovies = async () => {
       try {
         const response = await fetch(`${API_URL}?api_key=${API_KEY}&page=${page}`);
-        const data = await response.json();
-        console.log(data.total_pages);
+       const data = await response.json();
+        // console.log(data.total_pages);
         
         setMovies(data.results);
         setTotalPages(data.total_pages);
@@ -153,8 +154,10 @@ const Pagination = () => {
     <div className="p-4">
      
       
+        <MovieCard topData={movies}/>
+      
       {/* Movies Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {movies.map((movie) => (
           <div key={movie.id} className="p-2 border rounded-lg shadow m-2">
             <img
@@ -165,24 +168,37 @@ const Pagination = () => {
             <h2 className="text-lg font-semibold mt-2">{movie.title}</h2>
           </div>
         ))}
-      </div>
+      </div> */}
+
+
+
+
+
+
+
+
+
+    
+
 
       {/* Pagination */}
       <div className="flex justify-center mt-6 space-x-2">
-        {[...Array(Math.min(totalPages, 500)).keys()].map((num) => (
-          <button
-            key={num + 1}
-            onClick={() =>{
-                setPage(num + 1)
+        {[...Array(Math.min(totalPages, 500)).keys()].map((num) => {
+          
+        }
+          // <button
+          //   key={num + 1}
+          //   onClick={() =>{
+          //       setPage(num + 1)
                
-            }}
-            className={`px-4 py-2 rounded-md ${
-              page === num + 1 ? "bg-blue-500 text-white" : "bg-gray-300"
-            }`}
-          >
-            {num + 1}
-          </button>
-        ))}
+          //   }}
+          //   className={`px-4 py-2 rounded-md ${
+          //     page === num + 1 ? "bg-blue-500 text-white" : "bg-gray-300"
+          //   }`}
+          // >
+          //   {num + 1}
+          // </button>
+        )}
       </div>
     </div>
   );

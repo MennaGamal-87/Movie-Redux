@@ -11,7 +11,8 @@ import MovieCard from "../../components/Card/MovieCard";
 
 const Home=() => {
   const navigate=useNavigate();
-  const loading=useSelector((state)=>state.loading)
+  var loading=useSelector((state)=>state.Movies.loading)
+ 
     const AllMovies =useSelector((state)=>state.Movies.Movies.results)
     
     const AllSeries=useSelector((state)=>state.Series.Series.results)
@@ -19,7 +20,7 @@ const Home=() => {
     const TopSeries =useSelector((state)=>state.TopSeries.TopRatedSeries.results)
   
     const TopMovies =useSelector((state)=>state.TopMovies.TopRatedMovies.results)
-    console.log(TopMovies)
+    console.log(loading)
     const dispatch=useDispatch();
     useEffect(()=>{
       dispatch(getAllMovies())
@@ -30,7 +31,7 @@ const Home=() => {
     },[])
     return(
         <>
-        {loading&&(<span className="loader"></span>)}
+        {loading&&(<span className="loader w-[100%] h-[40vh] m-auto absolute top-50 left-[47%]"></span>)}
         <h1 className="font-bold text-blue-600 text-3xl m-3 mb-8 text-center">HOME</h1>
         <div className="w-[90%] m-auto flex justify-evenly items-center">
           <div onClick={()=>{navigate('/englishMovies')}} className={`bg-blue-700 rounded-[50%] w-[8%] h-[8vh] p-3 hover:cursor-pointer hover:bg-amber-50 hover:text-blue-500  transition duration-1500 hover:scale-150`}>
@@ -45,11 +46,11 @@ const Home=() => {
         </div>
         <div className="w-[90%] m-auto mb-10">
         <h1 className="font-bold text-blue-600 text-3xl m-3 mb-8">MOVIES</h1>
-        <Carsoul data={AllMovies}></Carsoul>
+        <Carsoul data={AllMovies} type={'movie'}></Carsoul>
         </div>
         <div className="w-[90%] m-auto">
         <h1 className="font-bold text-blue-600 text-3xl m-3 mb-8">SERIES</h1>
-        <Carsoul data={AllSeries}></Carsoul>
+        <Carsoul data={AllSeries} type={'series'}></Carsoul>
         </div>
         <div className="w-[90%] m-auto">
         <h1 className="font-bold text-blue-600 text-3xl m-3 mb-8">TOP MOVIES</h1>

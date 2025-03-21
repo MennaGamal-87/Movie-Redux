@@ -12,15 +12,17 @@ const ActorDetails=()=>{
     const dispatch=useDispatch()
     const actor=useSelector((state)=>state.ActorDetail.actorDetails)
     const knownFor=useSelector((state)=>state.actorKnownFor.knownFor.cast)
-    
+    var loading=useSelector((state)=>state.ActorDetail.loading)
     const firstThreeItems = knownFor&&knownFor.filter((item, index) => index < 3);
-    console.log(firstThreeItems);
+//     console.log(firstThreeItems);
     useEffect(()=>{
          dispatch(getActorDetails(actorId))
          dispatch(getActorKnownFor(actorId))
     },[])
     return(
         <>
+                {loading&&(<span className="loader w-[100%] h-[40vh] m-auto absolute top-50 left-[47%]"></span>)}
+
         <div className="w-[100%] h-auto p-2 flex justify-evenly">
             <div className="w-[27%] h-auto ">
                 <img className="mb-17" src={`${imgBaseURL}${actor.profile_path}`} alt="" />
