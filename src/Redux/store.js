@@ -18,10 +18,12 @@ import { posters } from './Slices/PostersSlice'
 import { mov } from './Slices/MoviesSlice'
 import { seri } from './Slices/SeriesSlice'
 import { seriesDetails } from './Slices/SeriesDetailsSlice'
+import { searchMovies } from './Slices/MovieSearchSlice'
+import { searchSeries } from './Slices/SeriesSearchSlice'
 
 
 export const store = configureStore({
   reducer: {
-    Movies,Series ,TopMovies,TopSeries,MovieDetails,MovieActors,Mkeywords,Recommendation,Reviews,ActorDetail,actorKnownFor,videos,EnglishMovie,ArabicMovie,AsianMovie,posters,mov,seri,seriesDetails
+    Movies,Series ,TopMovies,TopSeries,MovieDetails,MovieActors,Mkeywords,Recommendation,Reviews,ActorDetail,actorKnownFor,videos,EnglishMovie,ArabicMovie,AsianMovie,posters,mov,seri,seriesDetails,searchMovies,searchSeries
   },
 })

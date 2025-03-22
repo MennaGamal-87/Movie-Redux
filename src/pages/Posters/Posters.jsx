@@ -40,7 +40,7 @@ const [languages,setLanguages]=useState([])
           if(poster.iso_639_1==null){
             return(
               <>
-                <img className="w-[50%] h-[20vh]" src={`${imgBaseURL}${poster.file_path
+                <img className="w-[28%] h-[20vh] mb-5" src={`${imgBaseURL}${poster.file_path
 }`} alt="" />
               </>
             )
@@ -59,7 +59,7 @@ const [languages,setLanguages]=useState([])
           if(poster.iso_639_1=='sk'){
             return(
               <>
-                <img className="w-[50%] h-[20vh]" src={`${imgBaseURL}${poster.file_path
+                <img className="w-[28%] h-[20vh] mb-5" src={`${imgBaseURL}${poster.file_path
 }`} alt="" />
               </>
             )
@@ -78,7 +78,7 @@ const [languages,setLanguages]=useState([])
           if(poster.iso_639_1=='tr'){
             return(
               <>
-                <img className="w-[50%] h-[20vh]" src={`${imgBaseURL}${poster.file_path
+                <img className="w-[28%] h-[20vh] mb-5" src={`${imgBaseURL}${poster.file_path
 }`} alt="" />
               </>
             )
@@ -96,7 +96,7 @@ const [languages,setLanguages]=useState([])
           if(poster.iso_639_1=='fr'){
             return(
               <>
-                <img className="w-[50%] h-[20vh]" src={`${imgBaseURL}${poster.file_path
+                <img className="w-[28%] h-[20vh] mb-5" src={`${imgBaseURL}${poster.file_path
 }`} alt="" />
               </>
             )
@@ -113,7 +113,7 @@ const [languages,setLanguages]=useState([])
           if(poster.iso_639_1=='he'){
             return(
               <>
-                <img className="w-[50%] h-[20vh]" src={`${imgBaseURL}${poster.file_path
+                <img className="w-[28%] h-[20vh] mb-5" src={`${imgBaseURL}${poster.file_path
 }`} alt="" />
               </>
             )
@@ -130,7 +130,7 @@ const [languages,setLanguages]=useState([])
           if(poster.iso_639_1=='it'){
             return(
               <>
-                <img className="w-[50%] h-[20vh]" src={`${imgBaseURL}${poster.file_path
+                <img className="w-[28%] h-[20vh] mb-5" src={`${imgBaseURL}${poster.file_path
 }`} alt="" />
               </>
             )
@@ -147,7 +147,7 @@ const [languages,setLanguages]=useState([])
           if(poster.iso_639_1=='ru'){
             return(
               <>
-                <img className="w-[50%] h-[20vh]" src={`${imgBaseURL}${poster.file_path
+                <img className="w-[28%] h-[20vh] mb-5" src={`${imgBaseURL}${poster.file_path
 }`} alt="" />
               </>
             )
@@ -164,7 +164,7 @@ const [languages,setLanguages]=useState([])
           if(poster.iso_639_1=='sv'){
             return(
               <>
-                <img className="w-[50%] h-[20vh]" src={`${imgBaseURL}${poster.file_path
+                <img className="w-[28%] h-[20vh] mb-5" src={`${imgBaseURL}${poster.file_path
 }`} alt="" />
               </>
             )
@@ -181,7 +181,7 @@ const [languages,setLanguages]=useState([])
           if(poster.iso_639_1=='de'){
             return(
               <>
-                <img className="w-[50%] h-[20vh]" src={`${imgBaseURL}${poster.file_path
+                <img className="w-[28%] h-[20vh] mb-5" src={`${imgBaseURL}${poster.file_path
 }`} alt="" />
               </>
             )
@@ -201,7 +201,7 @@ const [languages,setLanguages]=useState([])
           if(poster.iso_639_1=='en'){
             return(
               <>
-                <img className="w-[50%] h-[20vh]" src={`${imgBaseURL}${poster.file_path
+                <img className="w-[28%] h-[20vh] mb-5" src={`${imgBaseURL}${poster.file_path
 }`} alt="" />
               </>
             )
@@ -288,12 +288,13 @@ const [languages,setLanguages]=useState([])
     return(
         <>
         <SubHeader/>
-        <h1>Social</h1>
+        <h1 className="text-3xl font-semibold text-sky-600 m-4 text-center">Social</h1>
+
         {loading&&(<span className="loader w-[100%] h-[40vh] m-auto absolute top-50 left-[47%]"></span>)}
 
 
         <Tabs id="custom-animation" value="html">
-        <TabsHeader className="mb-3 border-b-2 w-[100%]">
+        <TabsHeader className="mb-3 border-b-2 w-[90%] flex justify-evenly m-auto mb-5">
           {data.map(({ label, value }) => (
             <Tab className="hover:bg-sky-600 w-[20%] p-2  rounded-t-3xl" key={value} value={value}>
               {label}
@@ -302,13 +303,13 @@ const [languages,setLanguages]=useState([])
         </TabsHeader>
         <TabsBody
           animate={{
-            initial: { y: 250 },
+            initial: { y: 280 },
             mount: { y: 0 },
-            unmount: { y: 250 },
+            unmount: { y: 280 },
           }}
         >
           {data.map(({ value, desc }) => (
-            <TabPanel className="p-2 px-6 rounded-2xl w-[100%]  h-[70vh] flex justify-evenly" key={value} value={value}>
+            <TabPanel className="p-2 px-6 rounded-2xl w-[90%]  h-auto flex justify-evenly flex-wrap m-auto" key={value} value={value}>
               {desc}
             </TabPanel>
           ))}
@@ -351,9 +352,9 @@ const [languages,setLanguages]=useState([])
         </TabsHeader>
         <TabsBody
           animate={{
-            initial: { y: 250 },
+            initial: { y: 280 },
             mount: { y: 0 },
-            unmount: { y: 250 },
+            unmount: { y: 280 },
           }}
         >
         

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Navbar,
   MobileNav,
@@ -7,12 +7,25 @@ import {
   IconButton,
   Input,
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { SearchMovies } from "../../Redux/Slices/MovieSearchSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { imgBaseURL } from "../Carsoul/Carsoul";
+import { SearchSeries } from "../../Redux/Slices/SeriesSearchSlice";
  
 export function Header() {
+  const navigate=useNavigate()
+  const dispatch=useDispatch()
+  const[query,setQuery]=useState('')
 
+  const MovSearchResult=useSelector((state)=>state.searchMovies.MoviesSearch.results)
+  const SeriesSearchResult=useSelector((state)=>state.searchSeries.SeriesSearch.results)
+  console.log(SeriesSearchResult);
+  useEffect(()=>{
+   dispatch(SearchMovies(query)) 
+   dispatch(SearchSeries(query)) 
+  },[query])
   
-
   const [openNav, setOpenNav] = React.useState(false);
  
   React.useEffect(() => {
@@ -70,7 +83,7 @@ export function Header() {
       </Typography>
     </ul>
   );
- 
+ var inputVal=document.getElementById('input')
   return (
     <Navbar className="mx-auto max-w-screen-xl px-4 py-4 lg:px-8 lg:py-4 bg-black border-none">
       <div className="container mx-auto flex flex-wrap items-center justify-between text-blue-gray-900">
@@ -85,6 +98,8 @@ export function Header() {
         <div className="hidden items-center gap-x-2 lg:flex">
           <div className="relative flex w-full gap-2 md:w-max">
             <Input
+            id='input'
+            onChange={(e)=>setQuery(e.target.value)}
               type="search"
               placeholder="Search"
               containerProps={{
@@ -116,6 +131,47 @@ export function Header() {
                 />
               </svg>
             </div>
+            {query&&(
+                 <div className="absolute top-10 right-0 bg-black w-[180%]  h-[50vh] z-10 rounded-2xl border-2 border-sky-500 overflow-hidden flex justify-between">
+                 <div className="w-[50%]  p-1  overflow-scroll ">
+                   <h1 className="text-2xl font-semibold text-center m-1">Movies</h1>
+                   {MovSearchResult&&MovSearchResult.map((movie)=>{
+                   return(
+                     <>
+                     <div onClick={()=>{
+                      navigate(`/MovieDetails/${movie.id}`)
+                      setQuery(null)
+                      inputVal.value=''
+                      }} className="p-2 hover:cursor-pointer h-[10vh] bg-gray-700 flex justify-between border-2 border-sky-900 rounded-2xl">
+                       <img className="w-[20%] rounded-full" src={`${imgBaseURL}${movie.poster_path}`} alt="" />
+                       <h1 className="m-2">{movie.original_title}</h1>
+                     </div>
+                     </>
+                   )
+                 })}
+                 </div>
+                 <div className="w-[50%] p-1  overflow-scroll ">
+                   <h1 className="text-2xl font-semibold text-center m-1">Series</h1>
+                   {SeriesSearchResult&&SeriesSearchResult.map((seri)=>{
+                   return(
+                     <>
+                     <div onClick={()=>{
+                      navigate(`/seriesDetails/${seri.id}`);
+                      setQuery(null)
+                      inputVal.value=''
+                     
+                    }} className="p-2 h-[10vh] bg-gray-700 flex justify-between border-2 border-sky-900 rounded-2xl">
+                       <img className="w-[20%] rounded-full" src={`${imgBaseURL}${seri.poster_path}`} alt="" />
+                       <h1 className="m-2">{seri.name}</h1>
+                     </div>
+                     </>
+                   )
+                 })}
+                 </div>
+               
+               </div>
+            )}
+         
           </div>
           <Button size="md" className="rounded-3xl bg-blue-400 p-2 rounded-l-none">
             Search

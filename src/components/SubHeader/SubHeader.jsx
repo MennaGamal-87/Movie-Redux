@@ -24,7 +24,7 @@ const SubHeader=()=>{
                                <h1 className="font-semibold text-white text-[27px] m-3 mb-0 mt-4  opacity-90">
                                 {movieDetails.title} ({movieDetails.release_date})
                                 </h1>
-                               <div onClick={()=>navigate(`/movieDetails/${MovieId}`)} className=" flex justify-between items-center w-[25%] m-3 hover:cursor-pointer">
+                               <div onClick={()=>navigate(`/movieDetails/${MovieId}`)} className=" flex justify-between items-center w-[30%] m-3 hover:cursor-pointer">
                                <FaArrowLeft className="text-[16px]" />
                                <p className="mt-0">Back to main</p>
                                </div>
